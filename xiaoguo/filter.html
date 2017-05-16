@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .box {
+            margin: 20px auto;
+        }
+
+        .ul {
+            height: 50px;
+            width: 300px;
+            text-align: center;
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .ul li {
+            -webkit-flex-grow: 1;
+            cursor: pointer;
+        }
+
+        .ol {
+            height: 50px;
+            width: 300px;
+        }
+
+        .ol li {
+            display: flex;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .ol li span {
+            -webkit-flex-grow: 1;
+        }
+
+    </style>
+</head>
+<body ng-app="myApp">
+
+<div class="box" ng-controller="all">
+    <input type="text" ng-model="filter">
+    <button ng-click="search()">搜索</button>
+    <ul class="ul">
+        <li ng-repeat="item in list" ng-click="chang($index)">{{item.name}}</li>
+    </ul>
+    <ol class="ol">
+        <li ng-repeat="lop in price | orderBy:id+repeat | filter:filter">
+            <span>{{lop.hao}}</span>
+            <span>{{lop.xi}}</span>
+            <span>{{lop.price}}</span>
+        </li>
+    </ol>
+
+</div>
+
+<script type="text/javascript" src="common/angular.js"></script>
+<script type="text/javascript">
+
+    var app = angular.module("myApp", [])
+    app.service("vice", function () {
+        return [
+            {"hao": 313, "xi": "iphone", "price": 1999},
+            {"hao": 484, "xi": "iphone1", "price": 4589},
+            {"hao": 569, "xi": "iphone2", "price": 5999},
+            {"hao": 123, "xi": "iphone3", "price": 3999},
+            {"hao": 789, "xi": "iphone4", "price": 2999}
+        ]
+    })
+    app.controller("all", function ($scope, vice) {
+        $scope.list = [
+            {name: "编号"},
+            {name: "产品"},
+            {name: "价格"}
+        ]
+        $scope.price = vice;
+        $scope.len = ["hao", "xi", "price"];
+        $scope.id = "";
+        $scope.chang = function (index) {
+            $scope.repeat = $scope.len[index];
+            if ($scope.id == '-') {
+                $scope.id = '';
+            } else {
+                $scope.id = '-';
+            }
+        }
+        $scope.filter = '';
+
+    })
+
+</script>
+
+</body>
+</html>

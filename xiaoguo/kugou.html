@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minmum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/kugou.css">
+</head>
+<body ng-app="myApp">
+<header class="kugou-head">
+    <a href="#" class="kugouhead-a"><i class="fa fa-search"></i></a>
+    <span class="kugouhead-spn"><img src="img/kugou_03.png" alt="img">酷狗音乐</span>
+    <button class="kugou-btn">下载酷狗</button>
+</header>
+<div ng-controller="all">
+    <ul class="nav-ul">
+        <li ng-click="chang(1)"><a href="#/">新歌</a><span ng-class="{ 'show' : data.current == 1 }"></span></li>
+        <li ng-click="chang(2)"><a href="#/ranking">排行</a><span ng-class="{ 'show' : data.current == 2 }"></span></li>
+        <li ng-click="chang(3)"><a href="#/menu">歌单</a><span ng-class="{ 'show' : data.current == 3 }"></span></li>
+        <li ng-click="chang(4)"><a href="#/singer">歌手</a><span ng-class="{ 'show' : data.current == 4 }"></span></li>
+    </ul>
+</div>
+<section class="kugou-sec">
+    <div ng-view>
+
+    </div>
+</section>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/iscroll.js"></script>
+<script type="text/javascript" src="js/event.js"></script>
+<script type="text/javascript" src="js/touch.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/zai.js"></script>
+<script type="text/javascript" src="common/angular.js"></script>
+<script type="text/javascript" src="common/angular-route.js"></script>
+<script type="text/javascript" src="js/controll.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: #ccc;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        b, i {
+            display: inline-block;
+            padding: 0 15px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: #ccc;
+            color: #fff;
+            font-style: normal;
+            cursor: pointer;
+        }
+
+        li {
+            height: 50px;
+            line-height: 50px;
+        }
+
+    </style>
+</head>
+<body ng-app="myapp">
+<div ng-controller="love">
+    <ul>
+        <li ng-repeat="item in slist">
+            <i>{{item.wu}}</i>
+            <i>{{item.price}}</i>
+            <span ng-click="jian($index)">-</span>
+            <input type="text" ng-model="item.num">
+            <span ng-click="jia($index)">+</span>
+            <i ng-click="remove($index)">删除</i>
+        </li>
+    </ul>
+
+    总数：<b ng-bind="allNum()"></b>
+    总价：<b ng-bind="allPrice()"></b>
+</div>
+
+
+<script type="text/javascript" src="common/angular.js"></script>
+<script type="text/javascript" src="common/jquery.js"></script>
+<script type="text/javascript">
+
+    var app = angular.module("myapp", [])
+    app.controller("love", function ($scope) {
+        $scope.slist = [
+            {wu: "巧克力", price: 112, num: 1},
+            {wu: "苹果", price: 362, num: 1},
+            {wu: "草莓", price: 140, num: 1}
+        ];
+        console.log($scope.slist)
+        $scope.jian = function (index) {
+            if ($scope.slist[index].num > 1) {
+                $scope.slist[index].num--;
+            }
+        }
+        $scope.jia = function (index) {
+            $scope.slist[index].num++;
+        }
+        $scope.allNum = function () {
+            var num = 0;
+            $.each($scope.slist, function (i, n) {
+                num += n.num;
+            })
+            return num;
+        }
+        $scope.allPrice = function () {
+            var allprice = 0;
+            $.each($scope.slist, function (i, n) {
+                allprice += n.price * n.num;
+            })
+            allprice += "元";
+            return allprice;
+        }
+        $scope.remove = function (index) {
+            $scope.slist.splice(index, 1);
+        }
+    })
+</script>
+
+</body>
+</html>
