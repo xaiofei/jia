@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .nok {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #ccc;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nok">
+        <ul>
+
+        </ul>
+    </div>
+    <script src="/jquery1.7.js"></script>
+    <script>
+        var spn = location.search.split("=")[1];
+        $.ajax({
+            url: "/postlogin",
+            type: "post",
+            data: {
+                spn: spn
+            },
+            success: function(res) {
+                if (res.cout == 0) {
+                    let data = res.data,
+                        str = ""
+                    $.each(data, function(i, v) {
+                        str += `<li><span>这是${v.user}的密码：</span><span>${v.pwd}</span></li>`
+                    })
+                    $("ul").html(str)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

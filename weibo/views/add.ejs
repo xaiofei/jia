@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+
+<body>
+    <form method="post">
+        用户：<input type="text" name="user" class="user"> 密码：
+        <input type="text" name="pwd" class="pwd">
+        <input type="submit" value="注册" id="btn">
+    </form>
+    <script src="/jquery1.7.js"></script>
+    <script>
+        $("#btn").on("click", function() {
+            let user = $(".user").val().trim()
+            let pwd = $(".pwd").val().trim()
+            $.ajax({
+                url: "/postzhuce",
+                type: "post",
+                data: {
+                    user: user,
+                    pwd: pwd
+                },
+                success: function(res) {
+                    if (res.cout == 1) {
+                        location.href = "/"
+                    } else {
+                        location.href = "/zhuce"
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

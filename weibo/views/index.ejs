@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .box {
+            width: 400px;
+            border: 1px solid #ccc;
+            margin: 20px auto;
+            position: relative;
+        }
+        
+        .con {
+            width: 400px;
+            height: 300px;
+            overflow-y: auto;
+        }
+        
+        li {
+            line-height: 40px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+        
+        .btn {
+            position: absolute;
+            width: 250px;
+            height: 30px;
+            background: orange;
+            color: #fff;
+            border-width: 0;
+            left: 75px;
+            bottom: 10px;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="con">
+            <ul>
+
+            </ul>
+        </div>
+
+        <button class="btn">添加</button>
+    </div>
+
+    <script src="/jquery1.7.js"></script>
+    <script>
+        $.ajax({
+            url: "/postindex",
+            type: "post",
+            success: function(res) {
+                if (res.cout == 0) {
+                    let data = res.data,
+                        str = ""
+                    $.each(data, function(i, v) {
+                        str += `<li><span class='spn1'>${v.NO}</span> ：<span>${ v.user}</span></li>`
+                    })
+                    $("ul").html(str);
+                    chang();
+                }
+            }
+        })
+
+        function chang(k) {
+            var li = $("ul li");
+            $.each(li, function(i, val) {
+                let spn = $(this).find(".spn1").text();
+                console.log(spn)
+                $(this).on("click", function() {
+                    location.href = "/login?spn=" + spn;
+                })
+            })
+        }
+        $(".btn").on("click", function() {
+            location.href = "/zhuce";
+        })
+    </script>
+</body>
+
+</html>

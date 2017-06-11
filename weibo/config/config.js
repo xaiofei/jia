@@ -1,0 +1,18 @@
+var index = require("../routers/index.js")
+var postindex = require("../routers/postindex.js")
+var login = require("../routers/login.js")
+var postlogin = require("../routers/postlogin.js")
+var zhuce = require("../routers/zhuce.js")
+var postzhuce = require("../routers/postzhuce.js")
+// var shuo = require("../routers/shuo.js")
+// var postshuo = require("../routers/postshuo.js")
+module.exports = function(app) {
+	app.get("/",index)
+	app.post("/postindex",postindex)
+	app.get("/login",login)
+	app.post("/postlogin",postlogin)
+	app.get("/zhuce",zhuce)
+	app.post("/postzhuce",postzhuce)
+	// app.get("/shuo",shuo)
+	// app.post("/postshuo",postshuo)
+}
