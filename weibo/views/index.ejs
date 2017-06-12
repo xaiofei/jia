@@ -41,6 +41,10 @@
             bottom: 10px;
             padding: 10px 0;
         }
+        
+        b {
+            color: red;
+        }
     </style>
 </head>
 
@@ -65,7 +69,7 @@
                     let data = res.data,
                         str = ""
                     $.each(data, function(i, v) {
-                        str += `<li><span class='spn1'>${v.NO}</span> ：<span>${ v.user}</span></li>`
+                        str += `<li><span class='spn1'>${v.NO}</span> ：<span>${ v.user} </span>已经有<b>${v.id}</b>人访问过</li>`
                     })
                     $("ul").html(str);
                     chang();
@@ -76,10 +80,27 @@
         function chang(k) {
             var li = $("ul li");
             $.each(li, function(i, val) {
-                let spn = $(this).find(".spn1").text();
+                var spn = $(this).find(".spn1").text();
+                let bb = $(this).find("b").text();
                 console.log(spn)
                 $(this).on("click", function() {
-                    location.href = "/login?spn=" + spn;
+                    var addNum = ++bb;
+                    console.log(addNum)
+                    $.ajax({
+                        url: "/postAdd",
+                        type: "post",
+                        data: {
+                            num: addNum,
+                            only: spn
+                        },
+                        success: function(res) {
+
+                            location.href = "/login?spn=" + spn;
+
+
+                        }
+                    })
+
                 })
             })
         }
